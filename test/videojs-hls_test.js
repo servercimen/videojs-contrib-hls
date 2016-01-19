@@ -1846,7 +1846,7 @@ test('if withCredentials src option is used, withCredentials is set on the XHR o
   player.src({
     src: 'http://example.com/media.m3u8',
     type: 'application/vnd.apple.mpegurl',
-    withCredentials: true
+    withcredentials: true
   });
   openMediaSource(player);
   ok(requests[0].withCredentials,
@@ -1859,7 +1859,7 @@ test('src level credentials supersede the global options', function() {
   player.src({
     src: 'http://example.com/media.m3u8',
     type: 'application/vnd.apple.mpegurl',
-    withCredentials: true
+    withcredentials: true
   });
   openMediaSource(player);
   ok(requests[0].withCredentials,
