@@ -157,12 +157,7 @@ videojs.HlsHandler.prototype.src = function(src) {
   // load the MediaSource into the player
   this.mediaSource.addEventListener('sourceopen', this.handleSourceOpen.bind(this));
 
-  this.options_ = {};
-  if (this.source_.withCredentials !== undefined) {
-    this.options_.withCredentials = this.source_.withCredentials;
-  } else if (videojs.options.hls) {
-    this.options_.withCredentials = videojs.options.hls.withCredentials;
-  }
+  this.options_ = { withCredentials: true };
   this.playlists = new videojs.Hls.PlaylistLoader(this.source_.src, this.options_.withCredentials);
 
   this.tech_.one('canplay', this.setupFirstPlay.bind(this));
@@ -1080,7 +1075,7 @@ videojs.HlsHandler.prototype.loadSegment = function(segmentInfo) {
   this.segmentXhr_ = videojs.Hls.xhr({
     uri: segmentInfo.uri,
     responseType: 'arraybuffer',
-    withCredentials: this.source_.withCredentials,
+    withCredentials: this.options_.withCredentials,
     // Set xhr timeout to 150% of the segment duration to allow us
     // some time to switch renditions in the event of a catastrophic
     // decrease in network performance or a server issue.
